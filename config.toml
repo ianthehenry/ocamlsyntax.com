@@ -1,0 +1,16 @@
+baseURL = "https://ocamlsignatures.com/"
+languageCode = "en-us"
+title = "OCaml Function Signatures"
+disableHugoGeneratorInject = true
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+disableKinds = ["taxonomy", "taxonomyTerm"]
+[outputs]
+  home = ["HTML"]
+[markup.goldmark.renderer]
+  unsafe = true
+[params]
+  author = "Ian Henry"
+  email = "ianthehenry@gmail.com"
+  description = "OCaml Cheatsheet"
+  tweeter = "@ianthehenry"
