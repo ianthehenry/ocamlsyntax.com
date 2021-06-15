@@ -170,6 +170,6 @@ This is useful when you have a recursive GADT where the components of a value
 have a different phantom type than the value
 itself. [See here for more information.][polymorphic]
 
-[warning-16]: https://ocaml.org/learn/tutorials/common_error_messages.html#Warning-This-optional-argument-cannot-be-erased
-[monomorphic]: https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec228
-[polymorphic]: https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#s%3Agadts
+[warning-16]: https://ocaml.org/learn/tutorials/labels.html#quot-Warning-This-optional-argument-cannot-be-erased-quot
+[monomorphic]: https://ocaml.org/manual/locallyabstract.html
+[polymorphic]: https://ocaml.org/manual/gadts.html
