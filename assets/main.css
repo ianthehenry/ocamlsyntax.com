@@ -5,6 +5,7 @@
   padding: 0;
   font: inherit;
   border-color: #9fbfdf;
+  border-width: 2px;
 }
 
 body {
@@ -49,7 +50,7 @@ h1 del::after {
   left: 0;
   right: 0;
   top: 50%;
-  border-bottom: 2px solid;
+  border: solid 2px #fff;
 }
 
 strong {
@@ -66,7 +67,7 @@ ul ul, ol ol {
 
 hr {
   border-style: solid;
-  border-width: 1.5px 0 0 0;
+  border-width: 2px 0 0 0;
   border-radius: 1px;
 }
 
@@ -101,8 +102,8 @@ blockquote {
 aside {
   background-color: #5b94ce;
   padding: 0.5em;
+  border-style: solid;
   border-radius: 5px;
-  border: solid 2px;
 }
 
 h1 { font-size: 130%; }
@@ -178,7 +179,7 @@ h1 {
 }
 
 header {
-  border-left: solid 2px;
+  border-left-style: solid;
   padding-left: 1em;  
   margin-bottom: 2em;
 }
@@ -192,7 +193,7 @@ header h2 {
 }
 
 footer {
-  border-top: solid 2px;
+  border-top-style: solid;
   margin-top: 1em;
   padding: 1em;
   text-align: center;
