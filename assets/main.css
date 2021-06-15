@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   font: inherit;
+  border-color: #9fbfdf;
 }
 
 body {
@@ -98,8 +99,10 @@ blockquote {
 }
 
 aside {
+  background-color: #5b94ce;
   padding: 0.5em;
   border-radius: 5px;
+  border: solid 2px;
 }
 
 h1 { font-size: 130%; }
@@ -175,7 +178,7 @@ h1 {
 }
 
 header {
-  border-left: solid 2px #9fbfdf;
+  border-left: solid 2px;
   padding-left: 1em;  
   margin-bottom: 2em;
 }
@@ -189,7 +192,7 @@ header h2 {
 }
 
 footer {
-  border-top: solid 2px #9fbfdf;
+  border-top: solid 2px;
   margin-top: 1em;
   padding: 1em;
   text-align: center;
