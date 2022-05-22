@@ -29,7 +29,7 @@ let succ (x : int) : int = x + 1
 Named argument:
 
 ```ocaml
-val succ : x : int -> int
+val succ : x:int -> int
 
 let succ ~x = x + 1
 ```
@@ -37,7 +37,7 @@ let succ ~x = x + 1
 Renamed argument:
 
 ```ocaml
-val succ : x : int -> int
+val succ : x:int -> int
 
 let succ ~x:y = y + 1
 ```
@@ -45,7 +45,7 @@ let succ ~x:y = y + 1
 Named argument with annotated return type:
 
 ```ocaml
-val succ : x : int -> int
+val succ : x:int -> int
 
 let succ ~x : int = x + 1
 ```
@@ -56,7 +56,7 @@ disambiguate this from a renamed argument.
 Renamed argument with annotated return type:
 
 ```ocaml
-val succ : x : int -> int
+val succ : x:int -> int
 
 let succ ~x:y : int = y + 1
 ```
@@ -67,7 +67,7 @@ there is no more ambiguity.
 Annotated named argument:
 
 ```ocaml
-val succ : x : int -> int
+val succ : x:int -> int
 
 let succ ~(x : int) = x + 1
 ```
@@ -75,7 +75,7 @@ let succ ~(x : int) = x + 1
 Annotated renamed argument:
 
 ```ocaml
-val succ : x : int -> int
+val succ : x:int -> int
 
 let succ ~x:(y : int) = y + 1
 ```
@@ -83,7 +83,7 @@ let succ ~x:(y : int) = y + 1
 Optional argument:
 
 ```ocaml
-val succ : ?x : int -> unit -> int option
+val succ : ?x:int -> unit -> int option
 
 let succ ?x () = x + 1
 ```
@@ -109,7 +109,7 @@ let (+) x y = Option.map ~f:(fun x -> x + y) x;;
 Optional argument with a default value:
 
 ```ocaml
-val succ : ?x : int -> unit -> int
+val succ : ?x:int -> unit -> int
 
 let succ ?(x = 0) () = x + 1
 ```
@@ -117,7 +117,7 @@ let succ ?(x = 0) () = x + 1
 Annotated optional argument:
 
 ```ocaml
-val succ : ?x : int -> unit -> int option
+val succ : ?x:int -> unit -> int option
 
 let succ ?(x : int) () = x + 1
 ```
@@ -125,7 +125,7 @@ let succ ?(x : int) () = x + 1
 Annotated optional argument with a default value:
 
 ```ocaml
-val succ : ?x : int -> unit -> int
+val succ : ?x:int -> unit -> int
 
 let succ ?(x : int = 0) () = x + 1
 ```
@@ -133,7 +133,7 @@ let succ ?(x : int = 0) () = x + 1
 Renamed annotated optional argument with a default value:
 
 ```ocaml
-val succ : ?x : int -> unit -> int
+val succ : ?x:int -> unit -> int
 
 let succ ?x:(y : int = 0) () = y + 1
 ```
