@@ -254,26 +254,15 @@ Locally abstract type (monomorphic)
 {.label}
 
 ```ocaml {.mli}
-val foo : 'a -> unit
+val foo : 'a My_gadt.t -> unit
 ```
 ```ocaml {.captioned, .ml}
-let foo (type a) (x : a) = ignore x
-```
-
-<div class="caption">
-
-You will often see type variables introduced like this so that a GADT's phantom
-can vary over different branches of a match statement:
-
-```ocaml
-val foo : 'a My_gadt.t -> unit
-
 let foo (type a) (x : a My_gadt.t) = ignore x
 ```
 
-[See here for more information.][monomorphic]
-
-</div>
+You will often see type variables introduced like this so that a GADT's phantom
+can vary over different branches of a match statement. [See here for more information.][monomorphic]
+{.caption}
 
 Locally abstract type (polymorphic)
 {.label}
