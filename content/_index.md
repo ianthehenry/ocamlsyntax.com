@@ -46,7 +46,7 @@ let sum = ref 0 in
 for i = 1 to 3 do
     sum := !sum + i
 done;
-assert (!sum == 6)
+assert (!sum = 6)
 ```
 
 Note that the range is inclusive on both ends.
