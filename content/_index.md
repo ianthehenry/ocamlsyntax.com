@@ -64,7 +64,7 @@ type t = { foo : 'a. 'a -> int }
 
 # First-Class Modules
 
-As a parameter
+First-class module parameter (module-style)
 {.label}
 
 ```ocaml {.mli}
@@ -77,7 +77,19 @@ let min (type a)
   if Compare.(<) x y then x else y
 ```
 
-As an argument
+First-class module parameter (value-style)
+{.label}
+
+```ocaml {.mli}
+val min : (module Comparable.S with type t = 'a) -> 'a -> 'a -> 'a
+```
+```ocaml {.ml}
+let min (type a) (compare : (module Comparable.S with type t = a)) (x : a) (y : a) =
+  let module Compare = (val compare) in
+  if Compare.( < ) x y then x else y
+```
+
+First-class module argument
 {.label}
 ```ocaml {.ml}
 min (module Int) 1 2
