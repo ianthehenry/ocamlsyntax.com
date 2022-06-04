@@ -243,7 +243,7 @@ Annotated optional argument
 val succ : ?x:int -> unit -> int option
 ```
 ```ocaml {.ml}
-let succ ?(x : int) () = x + 1
+let succ ?(x : int option) () = Option.map ~f:(fun n -> n + 1) x
 ```
 
 Annotated optional argument with a default value
