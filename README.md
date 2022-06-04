@@ -1,4 +1,4 @@
-The source for [https://ocamlsignatures.com](https://ocamlsignatures.com).
+The source for [https://ocamlsyntax.com](https://ocamlsyntax.com).
 
 Depends on [Hugo](https://github.com/gohugoio/hugo).
 
