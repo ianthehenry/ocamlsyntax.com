@@ -52,7 +52,7 @@ assert (!sum = 6)
 Note that the range is inclusive on both ends.
 {.caption}
 
-Existentially typed record field
+Universally quantified record fields.
 {.label}
 
 ```ocaml {.mli}
