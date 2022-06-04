@@ -291,6 +291,6 @@ have a different phantom type than the value
 itself. [See here for more information.][polymorphic]
 {.caption}
 
-[warning-16]: https://ocaml.org/learn/tutorials/labels.html#quot-Warning-This-optional-argument-cannot-be-erased-quot
+[warning-16]: https://ocaml.org/docs/labels#warning-this-optional-argument-cannot-be-erased
 [monomorphic]: https://ocaml.org/manual/locallyabstract.html
-[polymorphic]: https://ocaml.org/manual/gadts.html
+[polymorphic]: https://v2.ocaml.org/manual/locallyabstract.html#p:polymorpic-locally-abstract
