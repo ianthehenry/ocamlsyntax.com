@@ -78,7 +78,7 @@ let min (type a)
 As an argument
 {.label}
 ```ocaml {.ml}
-min (val Int) 1 2
+min (module Int) 1 2
 ```
 
 # Function Signatures
