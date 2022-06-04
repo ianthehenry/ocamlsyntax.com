@@ -204,27 +204,11 @@ Optional argument
 val succ : ?x:int -> unit -> int option
 ```
 ```ocaml {.captioned, .ml}
-let succ ?x () = x + 1
+let succ ?x () = Option.map ~f:(fun n -> n + 1) x
 ```
 
 Note that optional arguments without subsequent positional arguments will generate a compiler warning, so we add a final unit argument to get around that. [See here for more information.][warning-16]
 {.caption}
-
-<aside>
-
-For functions that take optional arguments without defaulting them, we will assume that `(+)` has been redefined like so:
-
-```ocaml
-let (+) x y = Option.map (fun x -> x + y) x;;
-```
-
-Or, using the `Option` module from `Core`:
-
-```ocaml
-let (+) x y = Option.map ~f:(fun x -> x + y) x;;
-```
-
-</aside>
 
 Optional argument with a default value
 {.label}
