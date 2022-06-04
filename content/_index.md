@@ -33,7 +33,7 @@ end = struct
 end
 ```
 
-An explicit module signature is required when defining recursive modules.
+Recursive module definitions always require explicit signatures.
 {.caption}
 
 For loop
