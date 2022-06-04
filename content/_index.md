@@ -74,7 +74,7 @@ val min : (module Comparable.S with type t = 'a) -> 'a -> 'a -> 'a
 let min (type a)
   (module Compare : Comparable.S with type t = a)
   (x : a) (y : a) =
-  if Compare.(<) x y then x else y
+  if Compare.( < ) x y then x else y
 ```
 
 First-class module parameter (value-style)
