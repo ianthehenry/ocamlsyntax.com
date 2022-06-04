@@ -14,12 +14,19 @@ type t = { foo : 'a. 'a -> int }
 Mutually recursive modules
 {.label}
 
+```ocaml {.mli}
+module rec Foo : sig
+  type t = Bar of Bar.t | Nil
+end and Bar : sig
+  type t = Foo of Foo.t | Nil
+end
+```
 ```ocaml {.ml, .captioned}
 module rec Foo : sig
   type t = Bar of Bar.t | Nil
 end = struct
   type t = Bar of Bar.t | Nil
-end and module Bar : sig
+end and Bar : sig
   type t = Foo of Foo.t | Nil
 end = struct
   type t = Foo of Foo.t | Nil
@@ -51,6 +58,27 @@ type t = { foo : 'a. 'a -> int }
 ```
 ```ocaml {.ml}
 type t = { foo : 'a. 'a -> int }
+```
+
+# First-Class Modules
+
+As a parameter
+{.label}
+
+```ocaml {.mli}
+val min : (module Comparable.S with type t = 'a) -> 'a -> 'a -> 'a
+```
+```ocaml {.ml}
+let min (type a)
+  (module Compare : Comparable.S with type t = a)
+  (x : a) (y : a) =
+  if Compare.(<) x y then x else y
+```
+
+As an argument
+{.label}
+```ocaml {.ml}
+min (val Int) 1 2
 ```
 
 # Function Signatures
@@ -262,27 +290,6 @@ This is useful when you have a recursive GADT where the components of a value
 have a different phantom type than the value
 itself. [See here for more information.][polymorphic]
 {.caption}
-
-# First-Class Modules
-
-As a parameter
-{.label}
-
-```ocaml {.mli}
-val min : (module Comparable.S with type t = 'a) -> 'a -> 'a -> 'a
-```
-```ocaml {.ml}
-let min (type a)
-  (module Compare : Comparable.S with type t = a)
-  (x : a) (y : a) =
-  if Compare.(<) x y then x else y
-```
-
-As an argument
-{.label}
-```ocaml {.ml}
-min (val Int) 1 2
-```
 
 [warning-16]: https://ocaml.org/learn/tutorials/labels.html#quot-Warning-This-optional-argument-cannot-be-erased-quot
 [monomorphic]: https://ocaml.org/manual/locallyabstract.html
