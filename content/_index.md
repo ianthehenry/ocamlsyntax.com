@@ -56,10 +56,10 @@ Universally quantified record field
 {.label}
 
 ```ocaml {.mli}
-type t = { foo : 'a. 'a -> int }
+type t = { f : 'a. 'a list -> int }
 ```
 ```ocaml {.ml}
-type t = { foo : 'a. 'a -> int }
+type t = { f : 'a. 'a list -> int }
 ```
 
 # First-Class Modules
