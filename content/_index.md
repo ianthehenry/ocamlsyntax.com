@@ -10,7 +10,7 @@ let succ ?x:(y : int = 0) () = y + 1
 
 let foo : type a. a My_gadt.t -> unit = fun x -> ignore x
 
-type t = { foo : 'a. 'a -> int }
+type t = { f : 'a. 'a list -> int }
 ```
 
 Mutually recursive modules
