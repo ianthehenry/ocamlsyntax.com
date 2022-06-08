@@ -1,2 +1,5 @@
-public/
-resources/
+highlight.pack.js
+index.html
+odoc.css
+*.odoc
+*.odocl

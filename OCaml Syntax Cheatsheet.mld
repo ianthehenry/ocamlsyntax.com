@@ -1,29 +1,31 @@
----
-title: "OCaml Syntax Cheatsheet"
----
+{0 OCaml Syntax}
 
-Fan favorites
-{.label}
+that i can never remember
 
-```ocaml {.ml}
+{2 Fan favorites}
+
+{[
+(* ml *)
 let succ ?x:(y : int = 0) () = y + 1
 
 let foo : type a. a My_gadt.t -> unit = fun x -> ignore x
 
 type t = { f : 'a. 'a list -> int }
-```
+]}
 
-Mutually recursive modules
-{.label}
+{2 Mutually recursive modules}
 
-```ocaml {.mli}
+{[
+(* mli *)
 module rec Foo : sig
   type t = Bar of Bar.t | Nil
 end and Bar : sig
   type t = Foo of Foo.t | Nil
 end
-```
-```ocaml {.ml, .captioned}
+]}
+
+{[
+(* ml *)
 module rec Foo : sig
   type t = Bar of Bar.t | Nil
 end = struct
@@ -33,253 +35,286 @@ end and Bar : sig
 end = struct
   type t = Foo of Foo.t | Nil
 end
-```
+]}
 
 Recursive module definitions always require explicit signatures.
-{.caption}
 
-For loop
-{.label}
+{2 For loop}
 
-```ocaml {.ml, .captioned}
+{[
+(* ml *)
 let sum = ref 0 in
 for i = 1 to 3 do
     sum := !sum + i
 done;
 assert (!sum = 6)
-```
+]}
 
 Note that the range is inclusive on both ends.
-{.caption}
 
-Universally quantified record field
-{.label}
+{2 Universally quantified record field}
 
-```ocaml {.mli}
+{[
+(* mli *)
 type t = { f : 'a. 'a list -> int }
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 type t = { f : 'a. 'a list -> int }
-```
+]}
 
-# First-Class Modules
+{1 First-Class Modules}
 
-First-class module parameter (module-style)
-{.label}
+{2 First-class module parameter (module-style)}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val min : (module Comparable.S with type t = 'a) -> 'a -> 'a -> 'a
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let min (type a)
   (module Compare : Comparable.S with type t = a)
   (x : a) (y : a) =
   if Compare.( < ) x y then x else y
-```
+]}
 
-First-class module parameter (value-style)
-{.label}
+{2 First-class module parameter (value-style)}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val min : (module Comparable.S with type t = 'a) -> 'a -> 'a -> 'a
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let min (type a)
   (compare : (module Comparable.S with type t = a))
   (x : a) (y : a) =
   let module Compare = (val compare) in
   if Compare.( < ) x y then x else y
-```
+]}
 
-First-class module argument
-{.label}
-```ocaml {.ml}
+{2 First-class module argument}
+
+{[
+(* ml *)
 min (module Int) 1 2
-```
+]}
 
-# Function Signatures
+{1 Function Signatures}
 
-Annotated return type
-{.label}
+{2 Annotated return type}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ x : int = x + 1
-```
+]}
 
-Annotated positional argument
-{.label}
+{2 Annotated positional argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ (x : int) = x + 1
-```
+]}
 
-Annotated return type and positional argument
-{.label}
+{2 Annotated return type and positional argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ (x : int) : int = x + 1
-```
+]}
 
-Named argument
-{.label}
+{2 Named argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : x:int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ~x = x + 1
-```
+]}
 
-Renamed argument
-{.label}
+{2 Renamed argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : x:int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ~x:y = y + 1
-```
+]}
 
-Named argument with annotated return type
-{.label}
+{2 Named argument with annotated return type}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : x:int -> int
-```
-```ocaml {.captioned, .ml}
+]}
+
+{[
+(* ml *)
 let succ ~x : int = x + 1
-```
+]}
 
 Note that the space between the identifier and the colon is significant to
 disambiguate this from a renamed argument.
-{.caption}
 
-Renamed argument with annotated return type
-{.label}
+{2 Renamed argument with annotated return type}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : x:int -> int
-```
-```ocaml {.captioned, .ml}
+]}
+
+{[
+(* ml *)
 let succ ~x:y : int = y + 1
-```
+]}
 
 The space between the identifier and the second colon is no longer required, as
 there is no more ambiguity.
-{.caption}
 
-Annotated named argument
-{.label}
+{2 Annotated named argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : x:int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ~(x : int) = x + 1
-```
+]}
 
-Annotated renamed argument
-{.label}
+{2 Annotated renamed argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : x:int -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ~x:(y : int) = y + 1
-```
+]}
 
-Optional argument
-{.label}
+{2 Optional argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : ?x:int -> unit -> int option
-```
-```ocaml {.captioned, .ml}
+]}
+
+{[
+(* ml *)
 let succ ?x () = Option.map ~f:(fun n -> n + 1) x
-```
+]}
 
-Note that optional arguments without subsequent positional arguments will generate a compiler warning, so we add a final unit argument to get around that. [See here for more information.][warning-16]
-{.caption}
+Note that optional arguments without subsequent positional arguments will
+generate a compiler warning, so we add a final unit argument to get around that.
+{{: https://ocaml.org/docs/labels#warning-this-optional-argument-cannot-be-erased}
+See here for more information.}
 
-Optional argument with a default value
-{.label}
+{2 Optional argument with a default value}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : ?x:int -> unit -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ?(x = 0) () = x + 1
-```
+]}
 
-Annotated optional argument
-{.label}
+{2 Annotated optional argument}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : ?x:int -> unit -> int option
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ?(x : int option) () = Option.map ~f:(fun n -> n + 1) x
-```
+]}
 
-Annotated optional argument with a default value
-{.label}
+{2 Annotated optional argument with a default value}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : ?x:int -> unit -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ?(x : int = 0) () = x + 1
-```
+]}
 
-Renamed annotated optional argument with a default value
-{.label}
+{2 Renamed annotated optional argument with a default value}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val succ : ?x:int -> unit -> int
-```
-```ocaml {.ml}
+]}
+
+{[
+(* ml *)
 let succ ?x:(y : int = 0) () = y + 1
-```
+]}
 
-Locally abstract type (monomorphic)
-{.label}
+{2 Locally abstract type (monomorphic)}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val foo : 'a My_gadt.t -> unit
-```
-```ocaml {.captioned, .ml}
+]}
+
+{[
+(* ml *)
 let foo (type a) (x : a My_gadt.t) = ignore x
-```
+]}
 
 You will often see type variables introduced like this so that a GADT's phantom
-can vary over different branches of a match statement. [See here for more information.][monomorphic]
-{.caption}
+can vary over different branches of a match statement. {{: https://ocaml.org/manual/locallyabstract.html}
+See here for more information.}
 
-Locally abstract type (polymorphic)
-{.label}
+{2 Locally abstract type (polymorphic)}
 
-```ocaml {.mli}
+{[
+(* mli *)
 val foo : 'a My_gadt.t -> unit
-```
-```ocaml {.captioned, .ml}
+]}
+
+{[
+(* ml *)
 let foo : type a. a My_gadt.t -> unit =
   fun x -> ignore x
-```
+]}
 
 This is useful when you have a recursive GADT where the components of a value
 have a different phantom type than the value
-itself. [See here for more information.][polymorphic]
-{.caption}
-
-[warning-16]: https://ocaml.org/docs/labels#warning-this-optional-argument-cannot-be-erased
-[monomorphic]: https://ocaml.org/manual/locallyabstract.html
-[polymorphic]: https://v2.ocaml.org/manual/locallyabstract.html#p:polymorpic-locally-abstract
+itself. {{: https://v2.ocaml.org/manual/locallyabstract.html#p:polymorpic-locally-abstract}
+See here for more information.}
