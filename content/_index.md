@@ -250,6 +250,15 @@ val succ : ?x:int -> unit -> int
 let succ ?x:(y : int = 0) () = y + 1
 ```
 
+Explicit passing of an optional argument
+{.label}
+```ocaml {.ml}
+let succ ?(x : int = 0) () = x + 1
+let one = succ ?x:None ()
+let two = succ ?x:(Some one) ()
+let negative_succ ?(x : int option) () = -(succ ?x ())
+```
+
 Locally abstract type (monomorphic)
 {.label}
 
