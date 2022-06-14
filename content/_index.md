@@ -10,7 +10,7 @@ let succ ?x:(y : int = 0) () = y + 1
 
 let foo : type a. a My_gadt.t -> unit = fun x -> ignore x
 
-type t = { foo : 'a. 'a -> int }
+type t = { f : 'a. 'a list -> int }
 ```
 
 Mutually recursive modules
@@ -52,14 +52,14 @@ assert (!sum = 6)
 Note that the range is inclusive on both ends.
 {.caption}
 
-Existentially typed record field
+Universally quantified record field
 {.label}
 
 ```ocaml {.mli}
-type t = { foo : 'a. 'a -> int }
+type t = { f : 'a. 'a list -> int }
 ```
 ```ocaml {.ml}
-type t = { foo : 'a. 'a -> int }
+type t = { f : 'a. 'a list -> int }
 ```
 
 # First-Class Modules
@@ -204,27 +204,11 @@ Optional argument
 val succ : ?x:int -> unit -> int option
 ```
 ```ocaml {.captioned, .ml}
-let succ ?x () = x + 1
+let succ ?x () = Option.map ~f:(fun n -> n + 1) x
 ```
 
 Note that optional arguments without subsequent positional arguments will generate a compiler warning, so we add a final unit argument to get around that. [See here for more information.][warning-16]
 {.caption}
-
-<aside>
-
-For functions that take optional arguments without defaulting them, we will assume that `(+)` has been redefined like so:
-
-```ocaml
-let (+) x y = Option.map (fun x -> x + y) x;;
-```
-
-Or, using the `Option` module from `Core`:
-
-```ocaml
-let (+) x y = Option.map ~f:(fun x -> x + y) x;;
-```
-
-</aside>
 
 Optional argument with a default value
 {.label}
@@ -264,6 +248,15 @@ val succ : ?x:int -> unit -> int
 ```
 ```ocaml {.ml}
 let succ ?x:(y : int = 0) () = y + 1
+```
+
+Explicit passing of an optional argument
+{.label}
+```ocaml {.ml}
+let succ ?(x : int = 0) () = x + 1
+let one = succ ?x:None ()
+let two = succ ?x:(Some one) ()
+let negative_succ ?(x : int option) () = -(succ ?x ())
 ```
 
 Locally abstract type (monomorphic)
